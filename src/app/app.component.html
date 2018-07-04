@@ -1,13 +1,13 @@
 <!-- As a link -->
-<nav class="navbar navbar-light bg-dark">
+<nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Choferes</a>
 </nav>
 
 <div class="row pad-10">
 
     <div class="col-8">
-        <h3>Mapa</h3>
-        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="15">
+        <h3>Mapa <small *ngIf="siguiendoNombre">siguiendo a: {{siguiendoNombre}}</small> </h3>
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="16">
             <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
         </agm-map>
     </div>
@@ -15,8 +15,9 @@
         <h3>Choferes</h3>
         <div class="list-group">
 
-            <a href="#" *ngFor="let item of items | async" class="list-group-item list-group-item-action">{{item.nombre}}</a>
-
+            <a href="#" (click)="seguir( item )" *ngFor="let item of items" class="list-group-item list-group-item-action">{{item.nombre}}</a>
+            <br>
+            <button *ngIf="siguiendoNombre" (click)="dejarDeSeguir()" class="btn btn-primary btn-block"> Dejar de seguir </button>
         </div>
     </div>
 </div>
